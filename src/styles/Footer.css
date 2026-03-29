@@ -98,9 +98,9 @@
 
 .ft__main-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* ← đổi thành row */
   align-items: flex-start;
-  gap: 20px;
+  gap: 40px;
   width: 100%;
 }
 
@@ -331,6 +331,13 @@
     flex-direction: column;
     width: 100%;
     gap: 0;
+  }
+  .ft__main-row {
+    flex-direction: column;
+  }
+
+  .ft__brand {
+    width: 100%; /* full width khi stack dọc */
   }
 
   .ft__nav-col {

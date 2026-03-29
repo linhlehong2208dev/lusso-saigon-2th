@@ -1,5 +1,8 @@
 import React from "react";
 import styles from "../styles/overview.module.css";
+import phatDatLogo from "../assets/images/phat-dat-corp.png";
+import worldHotelsLogo from "../assets/images/worldhotels.png";
+import waveBg from "../assets/images/wave.png";
 
 export default function Overview() {
   return (
@@ -16,7 +19,7 @@ export default function Overview() {
             <div
               className={styles.logo}
               style={{
-                backgroundImage: "url(/src/assets/images/phat-dat-corp.png)",
+                backgroundImage: `url(${phatDatLogo})`,
               }}
             />
           </div>
@@ -27,7 +30,7 @@ export default function Overview() {
             <div
               className={styles.logo}
               style={{
-                backgroundImage: "url(/src/assets/images/worldhotels.png)",
+                backgroundImage: `url(${worldHotelsLogo})`,
               }}
             />
           </div>
@@ -64,7 +67,7 @@ export default function Overview() {
             <div
               className={styles.boxInner}
               style={{
-                backgroundImage: "url(/src/assets/images/wave.png)",
+                backgroundImage: `url(${waveBg})`,
               }}
             >
               <div className={styles.boxContent}>
@@ -80,7 +83,7 @@ export default function Overview() {
             <div
               className={styles.boxInner}
               style={{
-                backgroundImage: "url(/src/assets/images/wave.png)",
+                backgroundImage: `url(${waveBg})`,
               }}
             >
               <div className={styles.boxContent}>
@@ -96,7 +99,7 @@ export default function Overview() {
             <div
               className={styles.boxInner}
               style={{
-                backgroundImage: "url(/src/assets/images/wave.png)",
+                backgroundImage: `url(${waveBg})`,
               }}
             >
               <div className={styles.boxContent}>

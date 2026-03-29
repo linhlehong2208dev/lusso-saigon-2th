@@ -189,6 +189,10 @@ export default function TienIch({ onOpenModal }) {
                 alt={currentVideo.alt}
                 className={styles.video}
                 controls
+                autoPlay
+                muted
+                playsInline
+                webkitPlaysInline
                 onEnded={handleVideoEnded}
                 onPlay={handlePlay}
                 onPause={handlePause}

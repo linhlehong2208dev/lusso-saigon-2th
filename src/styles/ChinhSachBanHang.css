@@ -450,8 +450,9 @@
   font-weight: 400;
   font-style: italic;
   text-align: center;
-  margin-top: 2px;
-  white-space: nowrap;
+  margin-top: 4px;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 /* ════════════════════════════════════════

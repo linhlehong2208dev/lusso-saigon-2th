@@ -10,7 +10,7 @@
 .td {
   width: 100%;
   min-height: 100%;
-  background-image: url("../assets/images/bg-infor.png");
+  background-image: url("../assets/images/bg-infor.webp");
   background-size: cover;
   background-position: center;
   /* background: linear-gradient(160deg, #1a0008 0%, #2d0012 40%, #1a0008 100%); */
@@ -50,7 +50,7 @@
   text-align: center;
   letter-spacing: 2.4px;
   font-family: "Playfair Display", serif;
-  font-size: clamp(36px, 4.5vw, 60px);
+  font-size: clamp(1.2rem, 4.5vw, 3rem);
   font-weight: 500;
   line-height: 145%;
 }

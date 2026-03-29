@@ -1,0 +1,210 @@
+/* MatBang.css */
+
+/* ════════════════════════════════════════
+   SECTION
+════════════════════════════════════════ */
+.mb {
+  width: 100%;
+  padding: 56px 20px;
+  background: #fef8ec;
+}
+
+.mb__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+/* ════════════════════════════════════════
+   HEADER
+════════════════════════════════════════ */
+.mb__header {
+  text-align: center;
+}
+
+.mb__title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: 600;
+  color: #930027;
+  letter-spacing: 2px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.mb__line {
+  width: 200px;
+  height: 2px;
+  background: #9c5b00;
+  margin: 16px auto 0;
+}
+
+/* ════════════════════════════════════════
+   IMAGE WRAP
+════════════════════════════════════════ */
+.mb__img-wrap {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #e8e0d0; /* hiện trong khi ảnh đang load */
+}
+
+/* ← Dùng <img> thay background-image → không bị lỗi path */
+.mb__img {
+  width: 100%;
+  height: auto; /* giữ tỉ lệ gốc của ảnh */
+  display: block; /* bỏ khoảng trắng dưới ảnh */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ════════════════════════════════════════
+   MOBILE LIST  (ẩn mặc định, hiện <768px)
+════════════════════════════════════════ */
+.mb__mobile-list {
+  display: none;
+  width: 100%;
+  background: #930027;
+  padding: 16px 12px 12px;
+  border-radius: 8px;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Slider ── */
+.mb__slider {
+  width: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.mb__track {
+  display: flex;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.mb__page {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+.mb__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 8px;
+}
+
+.mb__col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Amenity item ── */
+.mb__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 4px 0;
+}
+
+.mb__badge {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+}
+
+.mb__badge svg,
+.mb__badge-num {
+  grid-area: 1 / 1;
+}
+
+.mb__badge svg {
+  width: 28px;
+  height: 28px;
+}
+
+.mb__badge-num {
+  color: #fff;
+  font-family: "Reddit Sans", Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}
+
+.mb__item-label {
+  color: #fff;
+  font-family: "Reddit Sans", Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  line-height: 1.4;
+}
+
+/* ── Dots ── */
+.mb__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 0 2px;
+}
+
+.mb__dot {
+  all: unset;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background: #d3a769;
+  opacity: 0.55;
+  transition:
+    width 0.25s,
+    height 0.25s,
+    background 0.25s,
+    opacity 0.25s;
+  display: block;
+}
+
+.mb__dot--active {
+  width: 16px;
+  height: 16px;
+  background: #f1e8ce;
+  opacity: 1;
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .mb {
+    padding: 40px 0;
+  }
+
+  .mb__container {
+    padding: 0 16px;
+    gap: 24px;
+  }
+
+  /* Hiện mobile slider */
+  .mb__mobile-list {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .mb__item-label {
+    font-size: 11px;
+  }
+
+  .mb__badge-num {
+    font-size: 10px;
+  }
+}

@@ -1,22 +1,22 @@
 .position {
   width: 100%;
-  height: 100vh;
-  padding: 0px 10rem;
+  min-height: 100vh;
+  padding: 0;
   background-color: #82152b;
 }
 
 .positionContainer {
-  background-image: url("/src/assets/images/position-bg.jpg"); /* sửa path ảnh */
-  background-size: 100% auto; /* đảm bảo ảnh không bị biến dạng */
-  /* background-size: fill; */
+  background-image: url("../assets/images/position-bg.webp");
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 /* Container nội dung (nếu sau này bạn thêm text/map) */
 .container {
   width: 100%;
@@ -24,24 +24,79 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 1.25rem;
+  padding: 0 2rem;
 }
 
 .title {
   color: #fff;
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 600;
   text-align: center;
+  max-width: 80%;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ════════════════════════════════════
+   RESPONSIVE - TABLET: 1200px trở xuống
+════════════════════════════════════ */
+@media (max-width: 1200px) {
   .position {
-    height: auto;
-    padding: 60px 16px;
+    min-height: 75vh;
+  }
+
+  .positionContainer {
+    height: 75vh;
   }
 
   .title {
-    font-size: 24px;
+    font-size: 1.75rem;
+  }
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE - MOBILE: 768px trở xuống
+════════════════════════════════════ */
+@media (max-width: 768px) {
+  .position {
+    min-height: auto;
+    padding: 3rem 1rem;
+  }
+
+  .positionContainer {
+    height: 50vh;
+    border-radius: 1rem;
+  }
+
+  .container {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    max-width: 100%;
+  }
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE - SMALL MOBILE: 480px trở xuống
+════════════════════════════════════ */
+@media (max-width: 480px) {
+  .position {
+    padding: 2rem 0.75rem;
+  }
+
+  .positionContainer {
+    height: 40vh;
+    border-radius: 0.75rem;
+  }
+
+  .container {
+    gap: 0.75rem;
+    padding: 0 0.75rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
   }
 }

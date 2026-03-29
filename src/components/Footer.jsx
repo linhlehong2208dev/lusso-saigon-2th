@@ -1,4 +1,5 @@
 // Footer.jsx
+import { useState } from "react";
 import "../styles/Footer.css";
 import reverLogo from "../assets/images/logo-rever.png";
 import bctLogo from "../assets/images/logo-bct.png";
@@ -116,8 +117,30 @@ const NAV_COLUMNS = [
   },
 ];
 
+// ── Arrow Icon ───────────────────────────────────────────────────────────────
+const ArrowIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M7 10l5 5 5-5z" fill="currentColor" />
+  </svg>
+);
+
 // ── Component ─────────────────────────────────────────────────────────────────
 export default function Footer() {
+  const [expandedSections, setExpandedSections] = useState({});
+
+  const toggleSection = (heading) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [heading]: !prev[heading],
+    }));
+  };
+
   return (
     <footer className="ft" id="lien-he">
       {/* ── Hotline bar ── */}
@@ -176,21 +199,45 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Nav columns */}
-            {NAV_COLUMNS.map((col) => (
-              <div key={col.heading} className="ft__nav-col">
-                <span className="ft__nav-heading">{col.heading}</span>
-                <ul className="ft__nav-list">
-                  {col.links.map((link) => (
-                    <li key={link}>
-                      <a href="#" className="ft__nav-link">
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            {/* Nav columns wrapper */}
+            <div className="ft__nav-cols-wrapper">
+              {NAV_COLUMNS.map((col) => (
+                <div key={col.heading} className="ft__nav-col">
+                  {/* Desktop: Span heading */}
+                  <span className="ft__nav-heading">{col.heading}</span>
+
+                  {/* Mobile/Tablet: Button with arrow */}
+                  <button
+                    className={`ft__nav-heading--btn ${
+                      expandedSections[col.heading]
+                        ? "ft__nav-heading--expanded"
+                        : ""
+                    }`}
+                    onClick={() => toggleSection(col.heading)}
+                  >
+                    <span>{col.heading}</span>
+                    <ArrowIcon />
+                  </button>
+
+                  {/* Nav list */}
+                  <ul
+                    className={`ft__nav-list ${
+                      expandedSections[col.heading]
+                        ? "ft__nav-list--expanded"
+                        : ""
+                    }`}
+                  >
+                    {col.links.map((link) => (
+                      <li key={link}>
+                        <a href="#" className="ft__nav-link">
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

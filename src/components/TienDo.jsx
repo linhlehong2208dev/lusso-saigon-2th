@@ -2,15 +2,15 @@
 import { useState } from "react";
 import "../styles/TienDo.css";
 
-import tiendo1 from "../assets/images/tiendo/1.jpg";
-import tiendo2 from "../assets/images/tiendo/2.jpg";
-import tiendo3 from "../assets/images/tiendo/3.jpg";
-import tiendo4 from "../assets/images/tiendo/4.jpg";
-import tiendo5 from "../assets/images/tiendo/5.jpg";
-import tiendo6 from "../assets/images/tiendo/6.jpg";
-import tiendo7 from "../assets/images/tiendo/7.jpg";
-import tiendo8 from "../assets/images/tiendo/8.jpg";
-import tiendo9 from "../assets/images/tiendo/9.jpg";
+import tiendo1 from "../assets/images/tiendo/1.webp";
+import tiendo2 from "../assets/images/tiendo/2.webp";
+import tiendo3 from "../assets/images/tiendo/3.webp";
+import tiendo4 from "../assets/images/tiendo/4.webp";
+import tiendo5 from "../assets/images/tiendo/5.webp";
+import tiendo6 from "../assets/images/tiendo/6.webp";
+import tiendo7 from "../assets/images/tiendo/7.webp";
+import tiendo8 from "../assets/images/tiendo/8.webp";
+import tiendo9 from "../assets/images/tiendo/9.webp";
 
 const IMAGES = [
   { id: 1, src: tiendo1, alt: "Tiến độ thi công 1" },

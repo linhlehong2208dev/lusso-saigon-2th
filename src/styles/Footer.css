@@ -9,7 +9,7 @@
   width: 100%;
   /* background: linear-gradient(160deg, #1a0008 0%, #2d0012 40%, #1a0008 100%); */
   /* Khi có background asset: */
-  background-image: url("../src/assets/images/bg-infor.png");
+  background-image: url("../assets/images/bg-infor.webp");
   background-size: cover;
   background-position: center;
   border-top: 1px solid #dfa777;
@@ -98,11 +98,10 @@
 
 .ft__main-row {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
   gap: 20px;
   width: 100%;
-  min-height: 280px;
 }
 
 /* ── Brand / Logo block ── */
@@ -206,6 +205,16 @@
   border-radius: 4px;
 }
 
+/* ── Nav columns wrapper ── */
+.ft__nav-cols-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
 /* ── Nav columns ── */
 .ft__nav-col {
   display: flex;
@@ -251,6 +260,46 @@
 }
 
 /* ════════════════════════════════════════
+   NAV HEADING BUTTON (Collapsible on mobile/tablet)
+════════════════════════════════════════ */
+.ft__nav-heading--btn {
+  all: unset;
+  cursor: pointer;
+  color: #fff;
+  font-family: "Reddit Sans", Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.48px;
+  line-height: 145%;
+  text-transform: uppercase;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  background: none;
+  transition: color 0.2s ease;
+}
+
+.ft__nav-heading--btn:hover {
+  color: #d3a769;
+}
+
+.ft__nav-heading--btn svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+  color: currentColor;
+}
+
+.ft__nav-heading--expanded svg {
+  transform: rotate(180deg);
+}
+
+/* ════════════════════════════════════════
    COPYRIGHT
 ════════════════════════════════════════ */
 .ft__copyright {
@@ -274,17 +323,51 @@
 }
 
 /* ════════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════════ */
-@media (max-width: 1100px) {
-  .ft__inner {
-    padding: 0 32px;
+   RESPONSIVE - TABLET & MOBILE
+════════════════════════════════════ */
+@media (max-width: 900px) {
+  /* Nav wrapper: stack vertically below brand */
+  .ft__nav-cols-wrapper {
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
   }
-  .ft__brand {
-    width: 280px;
-  }
+
   .ft__nav-col {
-    min-width: 110px;
+    width: 100%;
+    min-width: auto;
+    padding: 0;
+    border-top: 1px solid rgba(211, 167, 105, 0.2);
+    padding-top: 12px;
+    margin-top: 0;
+  }
+
+  .ft__nav-col:first-child {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  /* Show button, hide span heading on mobile */
+  .ft__nav-heading--btn {
+    display: flex;
+  }
+
+  .ft__nav-heading {
+    display: none;
+  }
+
+  /* Hide list by default on mobile */
+  .ft__nav-list {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  /* Show list when expanded on mobile */
+  .ft__nav-list--expanded {
+    display: flex;
   }
 }
 
@@ -292,17 +375,6 @@
   .ft__hotlines {
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
-  }
-  .ft__main-row {
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-  .ft__brand {
-    width: 100%;
-    max-width: 400px;
-  }
-  .ft__nav-col {
-    flex: 1 1 140px;
   }
 }
 

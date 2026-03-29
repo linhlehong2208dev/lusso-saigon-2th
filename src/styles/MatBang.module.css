@@ -1,11 +1,15 @@
-.matbang {
+MatBang.css
+
+/* ════════════════════════════════════════
+   SECTION
+════════════════════════════════════════ */
+.mb {
   width: 100%;
-  padding: 20px;
+  padding: 56px 20px;
   background: #fef8ec;
 }
 
-/* Container */
-.container {
+.mb__container {
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
@@ -14,49 +18,225 @@
   gap: 36px;
 }
 
-/* ===== HEADER ===== */
-.header {
+/* ════════════════════════════════════════
+   HEADER
+════════════════════════════════════════ */
+.mb__header {
   text-align: center;
-  position: relative;
 }
 
-.title {
+.mb__title {
   font-family: "Playfair Display", serif;
-  font-size: 48px;
+  font-size: clamp(24px, 4vw, 48px);
   font-weight: 600;
   color: #930027;
   letter-spacing: 2px;
   line-height: 1.4;
+  margin: 0;
 }
 
-/* Line decor */
-.line {
+.mb__line {
   width: 200px;
   height: 2px;
   background: #9c5b00;
-  margin: 20px auto 0;
+  margin: 16px auto 0;
 }
 
-/* ===== IMAGE ===== */
-.imageWrapper {
+/* ════════════════════════════════════════
+   DESKTOP IMAGE  (hiện ≥768px, ẩn mobile)
+════════════════════════════════════════ */
+.mb__desktop-img {
   width: 100%;
+  display: block; /* hiện mặc định */
 }
 
-.image {
+.mb__img {
   width: 100%;
   height: 49rem;
-  background: url("src/assets/images/matbang.jpg") center/cover no-repeat;
+  background: url("../assets/images/matbang.jpg") center / cover no-repeat;
+  background-color: #e8e0d0;
   border-radius: 10px;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ════════════════════════════════════════
+   MOBILE BLOCK  (ẩn mặc định, hiện <768px)
+════════════════════════════════════════ */
+.mb__mobile {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+}
+
+/* Ảnh mobile: contain để thấy toàn mặt bằng */
+.mb__img-mobile {
+  width: 100%;
+  height: 260px;
+  background: url("../assets/images/matbang.jpg") center / contain no-repeat;
+  background-color: #e8e0d0;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Panel đỏ chứa slider */
+.mb__list-panel {
+  width: 100%;
+  background: #930027;
+  padding: 16px 12px 12px;
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Slider ── */
+.mb__slider {
+  width: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.mb__track {
+  display: flex;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.mb__page {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+.mb__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 8px;
+}
+
+.mb__col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Amenity item ── */
+.mb__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 4px 0;
+}
+
+/* ────────────────────────────────────────
+   BADGE FIX:
+   Dùng display:grid + place-items:center
+   để overlay số lên giữa SVG circle.
+   Không dùng position:absolute nữa.
+─────────────────────────────────────────*/
+.mb__badge {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+
+  /* Grid overlay: SVG và số cùng chiếm 1 ô */
+  display: grid;
+  place-items: center;
+}
+
+/* SVG và số đều ở grid-area 1/1 → chồng nhau */
+.mb__badge svg,
+.mb__badge-num {
+  grid-area: 1 / 1;
+}
+
+.mb__badge svg {
+  width: 28px;
+  height: 28px;
+}
+
+.mb__badge-num {
+  color: #fff;
+  font-family: "Reddit Sans", Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  /* Không cần z-index vì grid stacking order: phần tử sau nằm trên */
+}
+
+.mb__item-label {
+  color: #fff;
+  font-family: "Reddit Sans", Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  line-height: 1.4;
+}
+
+/* ── Dots ── */
+.mb__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 0 2px;
+}
+
+.mb__dot {
+  all: unset;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background: #d3a769;
+  opacity: 0.55;
+  transition:
+    width 0.25s,
+    height 0.25s,
+    background 0.25s,
+    opacity 0.25s;
+  display: block;
+}
+
+.mb__dot--active {
+  width: 16px;
+  height: 16px;
+  background: #f1e8ce;
+  opacity: 1;
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .title {
-    font-size: 28px;
-    letter-spacing: 1px;
+  .mb {
+    padding: 40px 0;
   }
 
-  .image {
-    height: 300px;
+  .mb__container {
+    padding: 0 16px;
+    gap: 24px;
+  }
+
+  /* Ẩn desktop image */
+  .mb__img-wrap {
+    display: none;
+  }
+
+  /* Hiện mobile block */
+  .mb__mobile-list {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .mb__img-mobile {
+    height: 200px;
+  }
+
+  .mb__item-label {
+    font-size: 11px;
+  }
+
+  .mb__badge-num {
+    font-size: 10px;
   }
 }

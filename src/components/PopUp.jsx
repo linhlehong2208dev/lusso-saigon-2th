@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import styles from "../styles/PopUp.module.css";
+import logoLusso from "../assets/images/logo-lusso-saigon.png";
+
+const SHEET_URL =
+  "https://script.google.com/macros/s/AKfycbzgYpSnaUB7vn7hmXMRuuEUF9J9bPu2UR5VxN2Rbi-AJTlRJAk5yW0aPNf-XDW-Rk95MA/exec";
 
 export default function PopUp({ isOpen, onClose }) {
   const [form, setForm] = useState({
@@ -8,16 +12,30 @@ export default function PopUp({ isOpen, onClose }) {
     email: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-    alert("Đăng ký thành công!");
-    setForm({ name: "", phone: "", email: "", message: "" });
+    setLoading(true);
+    try {
+      await fetch(SHEET_URL, {
+        method: "POST",
+        mode: "no-cors", // bắt buộc với Apps Script
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      alert("Đăng ký thành công! Chuyên viên sẽ liên hệ bạn sớm nhất.");
+      setForm({ name: "", phone: "", email: "", message: "" });
+      onClose();
+    } catch (err) {
+      alert("Có lỗi xảy ra, vui lòng thử lại.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -25,7 +43,7 @@ export default function PopUp({ isOpen, onClose }) {
   return (
     <>
       {/* Overlay */}
-      <div className={styles.overlay} onClick={onClose}></div>
+      <div className={styles.overlay} onClick={onClose} />
 
       {/* Modal */}
       <div className={styles.modal}>
@@ -35,11 +53,7 @@ export default function PopUp({ isOpen, onClose }) {
 
         <div className={styles.container}>
           {/* Logo */}
-          <img
-            src="/src/assets/images/logo-lusso-saigon.png"
-            alt="Lusso Saigon"
-            className={styles.logo}
-          />
+          <img src={logoLusso} alt="Lusso Saigon" className={styles.logo} />
 
           {/* Title */}
           <h2>NHẬN BẢNG GIÁ VÀ CHÍNH SÁCH MỚI NHẤT LUSSO SAIGON</h2>
@@ -84,7 +98,9 @@ export default function PopUp({ isOpen, onClose }) {
               onChange={handleChange}
             />
 
-            <button type="submit">ĐĂNG KÝ</button>
+            <button type="submit" disabled={loading}>
+              {loading ? "ĐANG GỬI..." : "ĐĂNG KÝ"}
+            </button>
           </form>
         </div>
       </div>

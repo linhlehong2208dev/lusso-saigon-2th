@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../styles/ImgWorldhotel.module.css";
-import worldhotelsVideo from "../assets/images/worldhotels.mp4";
 export default function ImgWorldhotel() {
   return (
     <section className={styles.wrapper}>

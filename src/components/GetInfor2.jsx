@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "../styles/GetInformation2.module.css";
+import logoLusso from "../assets/images/logo-lusso-saigon.png";
 
 export default function GetInformation2() {
   const [form, setForm] = useState({
@@ -23,11 +24,7 @@ export default function GetInformation2() {
     <section className={styles.section} id="lien-he">
       <div className={styles.container}>
         {/* Logo */}
-        <img
-          src="../src/assets/images/logo-lusso-saigon.png"
-          alt="Lusso Saigon"
-          className={styles.logo}
-        />
+        <img src={logoLusso} alt="Lusso Saigon" className={styles.logo} />
 
         {/* Title */}
         <h2>NHẬN BẢNG GIÁ VÀ CHÍNH SÁCH MỚI NHẤT LUSSO SAIGON</h2>

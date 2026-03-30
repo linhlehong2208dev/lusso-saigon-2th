@@ -155,7 +155,6 @@ export default function CanHo({ onOpenModal }) {
               loading="lazy"
               decoding="async"
               onClick={openZoom}
-              style={{ cursor: "zoom-in" }}
             />
 
             {/* Prev arrow */}
@@ -197,7 +196,10 @@ export default function CanHo({ onOpenModal }) {
         {/* ZOOM MODAL */}
         {isZoomOpen && (
           <div className={styles.zoomOverlay} onClick={closeZoom}>
-            <div className={styles.zoomModal} onClick={(e) => e.stopPropagation()}>
+            <div
+              className={styles.zoomModal}
+              onClick={(e) => e.stopPropagation()}
+            >
               <button className={styles.zoomCloseBtn} onClick={closeZoom}>
                 ✕
               </button>
@@ -214,21 +216,31 @@ export default function CanHo({ onOpenModal }) {
                     className={`${styles.zoomArrow} ${styles.zoomArrowLeft}`}
                     onClick={handleZoomPrev}
                   >
-                    <img src={arrowIcon} alt="prev" style={{ transform: "scaleX(1)" }} />
+                    <img
+                      src={arrowIcon}
+                      alt="prev"
+                      style={{ transform: "scaleX(1)" }}
+                    />
                   </button>
 
                   <button
                     className={`${styles.zoomArrow} ${styles.zoomArrowRight}`}
                     onClick={handleZoomNext}
                   >
-                    <img src={arrowIcon} alt="next" style={{ transform: "scaleX(-1)" }} />
+                    <img
+                      src={arrowIcon}
+                      alt="next"
+                      style={{ transform: "scaleX(-1)" }}
+                    />
                   </button>
 
                   <div className={styles.zoomDots}>
                     {currentImages.map((_, index) => (
                       <span
                         key={index}
-                        className={index === zoomImageIndex ? styles.zoomActiveDot : ""}
+                        className={
+                          index === zoomImageIndex ? styles.zoomActiveDot : ""
+                        }
                         onClick={() => setZoomImageIndex(index)}
                       />
                     ))}

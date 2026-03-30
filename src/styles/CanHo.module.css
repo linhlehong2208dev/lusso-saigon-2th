@@ -61,6 +61,8 @@
   object-position: center;
   display: block;
   will-change: opacity; /* hint GPU để transition mượt */
+  pointer-events: auto;
+  cursor: zoom-in;
 }
 
 /* Fade transition – 180ms khớp với setTimeout trong JSX */
@@ -381,6 +383,18 @@
   .cta button {
     padding: 0.625rem 1.5rem;
     font-size: 0.875rem;
+  }
+}
+
+/* ════════════════════════════════════════
+   ANIMATIONS
+════════════════════════════════════════ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

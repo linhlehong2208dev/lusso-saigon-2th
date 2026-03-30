@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { label: "TIỆN ÍCH", href: "#tien-ich" },
   { label: "MẶT BẰNG", href: "#mat-bang" },
   { label: "CHÍNH SÁCH", href: "#chinh-sach" },
-  { label: "NHÀ MẪU", href: "#nha-mau" },
+  { label: "PHỐI CẢNH", href: "#nha-mau" },
   { label: "TIẾN ĐỘ", href: "#tien-do" },
   { label: "LIÊN HỆ", href: "#lien-he" },
 ];

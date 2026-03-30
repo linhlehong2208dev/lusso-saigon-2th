@@ -27,7 +27,7 @@ MatBang.css
 
 .mb__title {
   font-family: "Playfair Display", serif;
-  font-size: clamp(24px, 4vw, 48px);
+  font-size: clamp(24px, 4vw, 2.75rem);
   font-weight: 600;
   color: #930027;
   letter-spacing: 2px;

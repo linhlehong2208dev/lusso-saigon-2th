@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import styles from "../styles/getInformation.module.css";
+import Toast from "./Toast";
+
+const SHEET_URL =
+  "https://script.google.com/macros/s/AKfycbzgYpSnaUB7vn7hmXMRuuEUF9J9bPu2UR5VxN2Rbi-AJTlRJAk5yW0aPNf-XDW-Rk95MA/exec";
 
 export default function GetInformation() {
   const [formData, setFormData] = useState({
@@ -10,6 +14,8 @@ export default function GetInformation() {
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState({ message: "", type: "success" });
 
   const validatePhone = (phone) => {
     return /^\d{10}$/.test(phone.replace(/\s/g, ""));
@@ -47,19 +53,36 @@ export default function GetInformation() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Success - submit form
-      console.log("Form submitted:", formData);
-      alert("Cảm ơn bạn! Chúng tôi sẽ liên hệ trong thời gian soonest.");
-      // Reset form
+      setLoading(true);
+      // Gửi request mà không cần đợi response (fire and forget)
+      fetch(SHEET_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      }).catch(() => {
+        // Bỏ qua lỗi vì mode no-cors không cho phép đọc response
+      });
+
+      // Hiện toast ngay lập tức
+      setToast({
+        message: "Cảm ơn bạn! Chúng tôi sẽ liên hệ trong thời gian sớm nhất.",
+        type: "success",
+      });
+
+      // Reset form ngay lập tức
       setFormData({
         name: "",
         phone: "",
         product: "",
       });
+
       setSubmitted(true);
+      setLoading(false);
+
       setTimeout(() => setSubmitted(false), 3000);
     }
   };
@@ -71,11 +94,16 @@ export default function GetInformation() {
 
   return (
     <div className={styles.wrapper}>
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        onClose={() => setToast({ message: "", type: "success" })}
+      />
       <div className={styles.container}>
         {/* TEXT */}
         <p className={styles.desc}>
           Quý Anh/Chị điền thông tin bên dưới để nhận tư vấn ngay về tiềm năng
-          vị trí của Eaton Park.
+          vị trí của Lusso Saigon.
         </p>
 
         {/* FORM */}
@@ -119,19 +147,17 @@ export default function GetInformation() {
             />
           </div>
 
-          <button type="submit" className={`${styles.input} ${styles.button}`}>
-            NHẬN THÔNG TIN
+          <button
+            type="submit"
+            className={`${styles.input} ${styles.button}`}
+            disabled={loading}
+          >
+            {loading ? "ĐANG GỬI..." : "NHẬN THÔNG TIN"}
           </button>
-
-          {submitted && (
-            <div className={styles.successMessage}>
-              ✓ Thông tin đã được gửi thành công!
-            </div>
-          )}
         </form>
 
         {/* HOTLINE */}
-        <div className={styles.hotline}>HOTLINE: 0877191940</div>
+        <div className={styles.hotline}>HOTLINE: 0906 757 276</div>
       </div>
     </div>
   );

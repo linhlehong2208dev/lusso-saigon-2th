@@ -10,6 +10,14 @@ import tienichVid5 from "../assets/images/video/tienich5.webm";
 import tienichVid6 from "../assets/images/video/tienich6.webm";
 import tienichVid7 from "../assets/images/video/tienich7.webm";
 
+// Import ngoại khu images
+import tienichImg1 from "../assets/images/tienich/tienich1.webp";
+import tienichImg2 from "../assets/images/tienich/tienich2.webp";
+import tienichImg3 from "../assets/images/tienich/tienich3.webp";
+import tienichImg4 from "../assets/images/tienich/tienich4.webp";
+import tienichImg5 from "../assets/images/tienich/tienich5.webp";
+import tienichImg6 from "../assets/images/tienich/tienich6.webp";
+
 export default function TienIch({ onOpenModal }) {
   const [activeTab, setActiveTab] = useState("noi-khu");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -84,8 +92,15 @@ export default function TienIch({ onOpenModal }) {
     { src: tienichVid7, alt: "Tiện ích nội khu 6" },
   ];
 
-  // Ngoài khu - placeholder
-  const ngoaikhuVideos = [];
+  // Ngoài khu - images carousel
+  const ngoaikhuVideos = [
+    { src: tienichImg1, alt: "Tiện ích ngoại khu 1" },
+    { src: tienichImg2, alt: "Tiện ích ngoại khu 2" },
+    { src: tienichImg3, alt: "Tiện ích ngoại khu 3" },
+    { src: tienichImg4, alt: "Tiện ích ngoại khu 4" },
+    { src: tienichImg5, alt: "Tiện ích ngoại khu 5" },
+    { src: tienichImg6, alt: "Tiện ích ngoại khu 6" },
+  ];
 
   const videos = activeTab === "noi-khu" ? noikhuVideos : ngoaikhuVideos;
   const currentVideo = videos.length > 0 ? videos[currentIndex] : null;
@@ -113,16 +128,26 @@ export default function TienIch({ onOpenModal }) {
     };
   }, [modalShown, onOpenModal]);
 
-  // Autoplay video khi section vào viewport
+  // Autoplay video khi section vào viewport và auto-advance images cho ngoại khu
   useEffect(() => {
-    if (videoRef.current && isInViewport && !isManualPaused) {
-      videoRef.current.play().catch(() => {
-        // Autoplay có thể bị chặn bởi browser
-      });
-    } else if (videoRef.current && !isInViewport) {
-      videoRef.current.pause();
+    if (activeTab === "noi-khu") {
+      // For videos
+      if (videoRef.current && isInViewport && !isManualPaused) {
+        videoRef.current.play().catch(() => {
+          // Autoplay có thể bị chặn bởi browser
+        });
+      } else if (videoRef.current && !isInViewport) {
+        videoRef.current.pause();
+      }
+    } else {
+      // For images - auto-advance every 5 seconds
+      const timer = setInterval(() => {
+        setCurrentIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1));
+      }, 5000);
+
+      return () => clearInterval(timer);
     }
-  }, [isInViewport, isManualPaused, currentIndex, activeTab]);
+  }, [isInViewport, isManualPaused, currentIndex, activeTab, videos.length]);
 
   // Handle video ended - chuyển sang video tiếp theo
   const handleVideoEnded = () => {
@@ -179,24 +204,32 @@ export default function TienIch({ onOpenModal }) {
           </div>
         </div>
 
-        {/* VIDEO CAROUSEL */}
+        {/* VIDEO/IMAGE CAROUSEL */}
         <div className={styles.carouselWrapper}>
           <div className={styles.videoContainer}>
             {currentVideo ? (
-              <video
-                ref={videoRef}
-                src={currentVideo.src}
-                alt={currentVideo.alt}
-                className={styles.video}
-                controls
-                autoPlay
-                muted
-                playsInline
-                webkitPlaysInline
-                onEnded={handleVideoEnded}
-                onPlay={handlePlay}
-                onPause={handlePause}
-              />
+              activeTab === "noi-khu" ? (
+                <video
+                  ref={videoRef}
+                  src={currentVideo.src}
+                  alt={currentVideo.alt}
+                  className={styles.video}
+                  controls
+                  autoPlay
+                  muted
+                  playsInline
+                  webkitPlaysInline
+                  onEnded={handleVideoEnded}
+                  onPlay={handlePlay}
+                  onPause={handlePause}
+                />
+              ) : (
+                <img
+                  src={currentVideo.src}
+                  alt={currentVideo.alt}
+                  className={styles.video}
+                />
+              )
             ) : (
               <div className={styles.noContent}>Chưa có video ngoài khu</div>
             )}

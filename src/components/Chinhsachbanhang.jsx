@@ -31,111 +31,188 @@ const TABS = [
 
 /**
  * Mỗi milestone:
- *   label       – nhãn thời gian, hiển thị TRÊN đường line
- *   italic      – dòng nhỏ in nghiêng dưới label (optional)
- *   amount      – số tiền / % lớn, hiển thị DƯỚI đường line
- *   note        – ghi chú nhỏ dưới amount
- *   bankNote    – "Ngân hàng giải ngân" (optional)
- *   topNote     – ghi chú nhỏ phía trên label (optional)
- *   extraAmount – % phụ cùng cột (optional)
- *   extraNote   – ghi chú cho extraAmount (optional)
+ *   label        – nhãn thời gian hiển thị TRÊN line
+ *   topNote      – dòng nhỏ phía trên label (ví dụ: "Thông báo bàn giao nhà")
+ *   between      – text hiển thị TRÊN line ở khoảng GIỮA milestone này và milestone tiếp theo
+ *                  (dùng cho "Trong vòng 07 ngày")
+ *   betweenBelow – text hiển thị DƯỚI line ở khoảng giữa (dùng cho PA2)
+ *   amount       – số tiền / % lớn hiển thị DƯỚI line
+ *   amountLine2  – dòng % phụ ngay dưới amount (PA1: "9%")
+ *   note         – ghi chú nhỏ dưới amount
+ *   bankNote     – ghi chú màu vàng (Ngân hàng giải ngân…)
  */
 const SOLUTIONS = [
+  // ── PA1: Vay vốn ngân hàng ────────────────────────────────────────────────
   {
     id: "vay-von",
     title: "PHƯƠNG ÁN 1 : VAY VỐN NGÂN HÀNG - LUSSO F1",
-    subtitle: "CHI PHÍ THANH TOÁN 11% CHO ĐẾN KHI NHẬN NHÀ",
+    subtitle: "CHỈ THANH TOÁN 11% CHO ĐẾN KHI NHẬN NHÀ",
     badge: "(*) Hỗ trợ lãi suất 0% trong 20 tháng",
     milestones: [
       {
         label: "TTĐC",
+        // "Trong vòng 07 ngày" nằm TRÊN line, khoảng giữa node này và node T
+        between: "Trong vòng 07 ngày",
         amount: "50 triệu",
         note: "(Ký TTĐC)",
       },
       {
         label: "T",
-        italic: "Trong vòng 7 ngày",
         amount: "11%",
         note: "Ký HĐMB",
-        bankNote: "Ngân hàng giải ngân",
       },
       {
         label: "T+15",
         amount: "44%",
-        note: "Trong vòng 7 ngày",
         bankNote: "Ngân hàng giải ngân",
       },
       {
-        topNote: "Thông báo bàn giao nhà",
-        label: "T+540 ngày",
-        amount: "31%",
-        note: "Thông báo bàn giao nhà",
-        extraAmount: "9%",
-        extraNote: "Ngân hàng giải ngân",
+        topNote: "Thông báo bàn giao nhà\nT+540 ngày",
+        label: "T+540",
+        amount: "9%",
+        amountLine2: "31%",
+        bankNote: "Ngân hàng giải ngân",
       },
       {
         topNote: "Thông báo\ncấp sổ hồng",
         label: "",
         amount: "5%",
-        note: "Thông báo\ncấp sổ hồng",
       },
     ],
   },
+
+  // ── PA2: Chuẩn 18 tháng ───────────────────────────────────────────────────
+  // Chỉ 4 node. Khoảng giữa T → T+540 không có node,
+  // text "TB 3,5%/tháng" nằm TRÊN line, "Trong vòng 16 tháng" nằm DƯỚI line.
   {
     id: "chuan-18",
-    title: "PHƯƠNG ÁN 2 : CHUẨN 18 THÁNG",
-    subtitle: "THANH TOÁN THEO TIẾN ĐỘ THI CÔNG",
-    badge: "(*) Thanh toán theo đợt linh hoạt",
+    title: "PHƯƠNG ÁN 2 - LUSSO C18",
+    subtitle: "THANH TOÁN CHUẨN 18 THÁNG",
+    badge: "(*) Chiết khấu 7%",
     milestones: [
-      { label: "TTĐC", amount: "50 triệu", note: "(Ký TTĐC)" },
-      { label: "T", amount: "10%", note: "Ký HĐMB" },
-      { label: "T+6 tháng", amount: "10%", note: "Đợt 2" },
-      { label: "T+540 ngày", amount: "65%", note: "Bàn giao nhà" },
-      { label: "", amount: "5%", note: "Cấp sổ hồng" },
+      {
+        label: "TTĐC",
+        between: "Trong vòng 07 ngày",
+        amount: "50 triệu",
+        note: "(Ký TTĐC)",
+      },
+      {
+        label: "T",
+        // khoảng rộng sau node T → hiển thị text trên/dưới line
+        between: "Trung bình: 3,5% mỗi tháng",
+        betweenBelow: "Trong vòng 16 tháng",
+        amount: "10%",
+        note: "Ký HĐMB",
+      },
+      {
+        topNote: "Thông báo bàn giao nhà\nT+540 ngày",
+        label: "T+540",
+        amount: "25%",
+      },
+      {
+        topNote: "Thông báo\ncấp sổ hồng",
+        label: "",
+        amount: "5%",
+      },
     ],
   },
+
+  // ── PA3.1: Thanh toán sớm 50% ────────────────────────────────────────────
   {
     id: "som-50",
-    title: "PHƯƠNG ÁN 3 : THANH TOÁN SỚM 50%",
-    subtitle: "CHIẾT KHẤU ƯU ĐÃI ĐẾN 3%",
-    badge: "(*) Áp dụng chiết khấu 3% khi thanh toán sớm 50%",
+    title: "PHƯƠNG ÁN 3.1 - LUSSO S50",
+    subtitle: "THANH TOÁN SỚM 50%",
+    badge: "(*) Chiết khấu 8%",
     milestones: [
-      { label: "TTĐC", amount: "50 triệu", note: "(Ký TTĐC)" },
-      { label: "T", amount: "50%", note: "Ký HĐMB" },
-      { label: "T+15", amount: "20%", note: "Đợt 2" },
-      { label: "T+540 ngày", amount: "25%", note: "Bàn giao nhà" },
-      { label: "", amount: "5%", note: "Cấp sổ hồng" },
+      {
+        label: "TTĐC",
+        between: "Trong vòng 07 ngày",
+        amount: "50 triệu",
+        note: "(Ký TTĐC)",
+      },
+      {
+        label: "T",
+        amount: "10%",
+        note: "Ký HĐMB",
+      },
+      {
+        label: "T+30",
+        amount: "40%",
+      },
+      {
+        label: "T+300",
+        amount: "2%",
+        bankNote: "Trung bình 3%/tháng",
+      },
+      {
+        topNote: "Thông báo bàn giao nhà\nT+540 ngày",
+        label: "T+540",
+        amount: "25%",
+      },
+      {
+        topNote: "Thông báo\ncấp sổ hồng",
+        label: "",
+        amount: "5%",
+      },
     ],
   },
+
+  // ── PA3.2: Thanh toán sớm 70% ────────────────────────────────────────────
   {
     id: "som-70",
-    title: "PHƯƠNG ÁN 4 : THANH TOÁN SỚM 70%",
-    subtitle: "CHIẾT KHẤU ƯU ĐÃI ĐẾN 5%",
-    badge: "(*) Áp dụng chiết khấu 5% khi thanh toán sớm 70%",
+    title: "PHƯƠNG ÁN 3.2 - LUSSO S70",
+    subtitle: "THANH TOÁN SỚM 70%",
+    badge: "(*) Chiết khấu 10%",
     milestones: [
-      { label: "TTĐC", amount: "50 triệu", note: "(Ký TTĐC)" },
-      { label: "T", amount: "70%", note: "Ký HĐMB" },
-      { label: "T+15", amount: "5%", note: "Đợt 2" },
-      { label: "T+540 ngày", amount: "20%", note: "Bàn giao nhà" },
-      { label: "", amount: "5%", note: "Cấp sổ hồng" },
+      {
+        label: "TTĐC",
+        between: "Trong vòng 07 ngày",
+        amount: "50 triệu",
+        note: "(Ký TTĐC)",
+      },
+      {
+        label: "T",
+        amount: "10%",
+        note: "Ký HĐMB",
+      },
+      {
+        label: "T+30",
+        amount: "60%",
+      },
+      {
+        topNote: "Thông báo bàn giao nhà\nT+540 ngày",
+        label: "T+540",
+        amount: "25%",
+      },
+      {
+        topNote: "Thông báo\ncấp sổ hồng",
+        label: "",
+        amount: "5%",
+      },
     ],
   },
 ];
 
-// ── RoadmapTimeline – FLEXBOX THUẦN, không dùng position:absolute ────────────
-// Cấu trúc 5 hàng ngang, mỗi hàng 5 cột equal-width:
-//   [topNote row]
-//   [label  row]   TTĐC | T     | T+15  | T+540  | (trống)
-//   [track  row]   ●────────────────────────────────●
-//   [amount row]   50tr | 11%   | 44%   | 31%    | 5%
-//   [note   row]   ...  | ...   | ...   | ...    | ...
+// ── RoadmapTimeline ───────────────────────────────────────────────────────────
+//
+// Layout 5 hàng × N cột (N = số milestone):
+//
+//   Row 1 [top-note]  :  topNote nhỏ phía trên label
+//   Row 2 [label]     :  nhãn thời gian (TTĐC, T, T+15…)
+//   Row 3 [track]     :  ●───between-text───●───●
+//   Row 4 [amount]    :  50tr  11%  44%  9%+31%  5%
+//   Row 5 [note]      :  ghi chú + bankNote
+//
+// "between" text nằm GIỮA 2 dot trên đường line (trên line).
+// "betweenBelow" text nằm GIỮA 2 dot phía DƯỚI đường line.
+// Cả hai đều render bên trong .rm__track, dùng flex để căn giữa khoảng.
 
 function RoadmapTimeline({ milestones }) {
   const hasTopNotes = milestones.some((m) => m.topNote);
 
   return (
     <div className="rm">
-      {/* Hàng 1: top-note (chỉ render nếu có) */}
+      {/* ── Hàng 1: top-note ── */}
       {hasTopNotes && (
         <div className="rm__row rm__row--top">
           {milestones.map((m, i) => (
@@ -153,56 +230,72 @@ function RoadmapTimeline({ milestones }) {
         </div>
       )}
 
-      {/* Hàng 2: label + italic */}
+      {/* ── Hàng 2: label ── */}
       <div className="rm__row rm__row--label">
         {milestones.map((m, i) => (
           <div key={i} className="rm__col">
             {m.label && <span className="rm__label">{m.label}</span>}
-            {m.italic && <span className="rm__italic">{m.italic}</span>}
           </div>
         ))}
       </div>
 
-      {/* Hàng 3: đường line + dots */}
+      {/* ── Hàng 3: track (line + dots + between-text) ── */}
       <div className="rm__track">
         <div className="rm__line" />
-        {milestones.map((_, i) => (
+
+        {milestones.map((m, i) => (
           <div key={i} className="rm__col rm__col--dot">
+            {/* Dot */}
             <span className="rm__dot">
               <Dot />
             </span>
-          </div>
-        ))}
-      </div>
 
-      {/* Hàng 4: amount chính + extraAmount */}
-      <div className="rm__row rm__row--amount">
-        {milestones.map((m, i) => (
-          <div key={i} className="rm__col">
-            <span className="rm__amount">{m.amount}</span>
-            {m.extraAmount && (
-              <span className="rm__amount rm__amount--extra">
-                {m.extraAmount}
+            {/* "between" text: nằm trên line, căn giữa khoảng trống SAU dot này */}
+            {m.between && (
+              <span className="rm__between rm__between--above">
+                {m.between}
+              </span>
+            )}
+
+            {/* "betweenBelow" text: nằm dưới line, căn giữa khoảng trống SAU dot này */}
+            {m.betweenBelow && (
+              <span className="rm__between rm__between--below">
+                {m.betweenBelow}
               </span>
             )}
           </div>
         ))}
       </div>
 
-      {/* Hàng 5: note + bankNote + extraNote */}
+      {/* ── Hàng 4: amount ── */}
+      <div className="rm__row rm__row--amount">
+        {milestones.map((m, i) => (
+          <div key={i} className="rm__col">
+            <span className="rm__amount">{m.amount}</span>
+            {m.amountLine2 && (
+              <span className="rm__amount rm__amount--extra">
+                {m.amountLine2}
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* ── Hàng 5: note + bankNote ── */}
       <div className="rm__row rm__row--note">
         {milestones.map((m, i) => (
           <div key={i} className="rm__col">
-            <span className="rm__note">
-              {m.note.split("\n").map((line, j, arr) => (
-                <span key={j}>
-                  {line}
-                  {j < arr.length - 1 && <br />}
-                </span>
-              ))}
-            </span>
+            {m.note && (
+              <span className="rm__note">
+                {m.note.split("\n").map((line, j, arr) => (
+                  <span key={j}>
+                    {line}
+                    {j < arr.length - 1 && <br />}
+                  </span>
+                ))}
+              </span>
+            )}
             {m.bankNote && <span className="rm__bank">{m.bankNote}</span>}
-            {m.extraNote && <span className="rm__bank">{m.extraNote}</span>}
           </div>
         ))}
       </div>
@@ -236,7 +329,7 @@ export default function ChinhSachBanHang() {
   return (
     <section className="csb" id="chinh-sach">
       <div className="csb__inner">
-        {/* Logo row – 3 đối tác */}
+        {/* Logo row */}
         <div className="csb__logos">
           <div className="csb__logo-item">
             <img src={logo1} alt="Rever" />

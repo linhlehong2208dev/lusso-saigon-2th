@@ -1,19 +1,26 @@
-/* Hero Section - Video Fullscreen */
-/* Header height: 80px (fixed) */
+/* Hero.css */
+
 :root {
   --header-height: 80px;
 }
 
+/* ════════════════════════════════════════
+   HERO WRAPPER
+   Luôn giữ tỷ lệ 16:9 theo width
+════════════════════════════════════════ */
 .hero {
   position: relative;
   width: 100%;
-  height: calc(100vh - var(--header-height));
-  min-height: 500px;
+  /* 16:9 = height luôn bằng 56.25% của width */
+  aspect-ratio: 16 / 9;
+  /* Không dùng height: 100vh nữa */
   overflow: hidden;
   margin-top: var(--header-height);
 }
 
-/* Video Banner */
+/* ════════════════════════════════════════
+   VIDEO
+════════════════════════════════════════ */
 .hero__video {
   position: absolute;
   top: 0;
@@ -24,7 +31,7 @@
   object-position: center;
 }
 
-/* Fallback image nếu browser không support video */
+/* Fallback image */
 .hero__fallback {
   position: absolute;
   top: 0;
@@ -33,34 +40,4 @@
   height: 100%;
   object-fit: cover;
   display: none;
-}
-
-/* ════════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════════ */
-
-/* Desktop: > 1200px - giữ nguyên */
-
-/* Tablet: 768px - 1200px */
-@media (max-width: 1200px) {
-  .hero {
-    height: calc(100vh - var(--header-height));
-    min-height: 400px;
-  }
-}
-
-/* Mobile: < 768px */
-@media (max-width: 768px) {
-  .hero {
-    height: calc(100vh - var(--header-height));
-    min-height: 350px;
-  }
-}
-
-/* Small mobile: < 480px */
-@media (max-width: 480px) {
-  .hero {
-    height: calc(100vh - var(--header-height));
-    min-height: 300px;
-  }
 }

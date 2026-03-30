@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "../styles/ImgWorldhotel.module.css";
+
 export default function ImgWorldhotel() {
+  const [isInViewport, setIsInViewport] = useState(false);
+  const sectionRef = useRef(null);
+  const iframeRef = useRef(null);
+
+  const YOUTUBE_VIDEO_ID = "Frtdo71dfAk";
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInViewport(entry.isIntersecting);
+      },
+      { threshold: 0.3 },
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section className={styles.wrapper}>
+    <section className={styles.wrapper} ref={sectionRef}>
       <div className={styles.container}>
         {/* TOP CONTENT */}
         <div className={styles.top}>
@@ -59,15 +85,20 @@ export default function ImgWorldhotel() {
         </div>
 
         {/* VIDEO */}
-        <iframe
-          className={styles.videoWrapper}
-          src="https://www.youtube.com/embed/Frtdo71dfAk"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-        ></iframe>
+        <div className={styles.videoContainer}>
+          <iframe
+            ref={iframeRef}
+            className={styles.videoWrapper}
+            src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}${
+              isInViewport ? "?autoplay=1&mute=1" : ""
+            }&fs=1&modestbranding=1&rel=0`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+        </div>
       </div>
     </section>
   );

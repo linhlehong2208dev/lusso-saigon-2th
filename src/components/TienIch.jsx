@@ -3,12 +3,12 @@ import styles from "../styles/TienIch.module.css";
 import arrowIcon from "../assets/images/arrow-icon.png";
 
 // Import nội khu videos
-import tienichVid1 from "../assets/images/video/tienich.webm";
-import tienichVid2 from "../assets/images/video/tienich2.webm";
-import tienichVid4 from "../assets/images/video/tienich4.webm";
-import tienichVid5 from "../assets/images/video/tienich5.webm";
-import tienichVid6 from "../assets/images/video/tienich6.webm";
-import tienichVid7 from "../assets/images/video/tienich7.webm";
+import tienichVid1 from "../assets/images/video/tienich.mp4";
+import tienichVid2 from "../assets/images/video/tienich2.mp4";
+import tienichVid4 from "../assets/images/video/tienich4.mp4";
+import tienichVid5 from "../assets/images/video/tienich5.mp4";
+import tienichVid6 from "../assets/images/video/tienich6.mp4";
+import tienichVid7 from "../assets/images/video/tienich7.mp4";
 
 // Import ngoại khu images
 import tienichImg1 from "../assets/images/tienich/tienich1.webp";

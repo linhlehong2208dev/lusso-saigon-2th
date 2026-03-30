@@ -70,8 +70,8 @@ const COMPANY_INFO = [
   },
   {
     icon: <PhoneIcon />,
-    text: "08 6970 2321 - 1800 234 546",
-    isLink: "tel:+18002345462",
+    text: "0906757276",
+    isLink: "tel:+84906757276",
   },
   {
     icon: <HomeIcon />,

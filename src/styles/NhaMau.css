@@ -141,18 +141,20 @@
 /* ── Thumbnails ── */
 .nm__thumbs {
   width: 100%;
-  height: 170px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
   gap: 16px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .nm__thumb {
   all: unset;
   cursor: pointer;
   position: relative;
-  width: 100%;
+  width: calc((100% - 6 * 16px) / 7);
   height: 170px;
+  flex-shrink: 0;
   overflow: hidden;
   border-radius: 4px;
   background: #2a0008;
@@ -320,11 +322,11 @@
     height: 360px;
   }
   .nm__thumbs {
-    height: 120px;
     gap: 10px;
   }
   .nm__thumb {
-    height: 120px;
+    width: calc((100% - 6 * 10px) / 7);
+    height: 100px;
   }
 }
 
@@ -333,11 +335,10 @@
     height: 260px;
   }
   .nm__thumbs {
-    grid-template-columns: repeat(4, 1fr);
-    height: 80px;
     gap: 8px;
   }
   .nm__thumb {
-    height: 80px;
+    width: calc((100% - 6 * 8px) / 7);
+    height: 70px;
   }
 }

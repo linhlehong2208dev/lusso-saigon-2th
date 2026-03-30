@@ -62,7 +62,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 2rem;
   padding: 20px 0;
 }
 
@@ -72,7 +72,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  gap: 2rem;
 }
 
 .csb__title {
@@ -507,7 +507,10 @@
   .csb__logo-item {
     height: 2.5rem;
   }
-
+  .csb__title-block,
+  .csb__content {
+    gap: 0px;
+  }
   .csb__tabs {
     grid-template-columns: 1fr; /* 1 cột → 4 hàng × 1 tab */
   }

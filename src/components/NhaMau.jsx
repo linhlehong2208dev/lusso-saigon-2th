@@ -1,46 +1,36 @@
-// NhaMau.jsx
 import { useState, useEffect, useRef } from "react";
 import "../styles/NhaMau.css";
 
-// ── Import ảnh thật vào đây ───────────────────────────────────────────────────
-// import img1 from "../assets/images/canho/nha-mau-1.jpg";
-// import img2 from "../assets/images/canho/nha-mau-2.jpg";
-// import img3 from "../assets/images/canho/nha-mau-3.jpg";
-// import img4 from "../assets/images/canho/nha-mau-4.jpg";
+// ── Import 11 ảnh phối cảnh ───────────────────────────────────────────────────
+import img1 from "../assets/images/phoicanh/1.webp";
+import img2 from "../assets/images/phoicanh/2.webp";
+import img3 from "../assets/images/phoicanh/3.webp";
+import img4 from "../assets/images/phoicanh/4.webp";
+import img5 from "../assets/images/phoicanh/5.webp";
+import img6 from "../assets/images/phoicanh/6.webp";
+import img7 from "../assets/images/phoicanh/7.webp";
+import img8 from "../assets/images/phoicanh/8.webp";
+import img9 from "../assets/images/phoicanh/9.webp";
+import img10 from "../assets/images/phoicanh/10.webp";
+import img11 from "../assets/images/phoicanh/11.webp";
 
-// Placeholder tạm – xóa khi có ảnh thật
+// ── Data: 11 ảnh phối cảnh ────────────────────────────────────────────────────
 const IMAGES = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1200&q=80",
-    alt: "Nhà mẫu 1",
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=80",
-    alt: "Nhà mẫu 2",
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80",
-    alt: "Nhà mẫu 3",
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80",
-    alt: "Nhà mẫu 4",
-  },
+  { id: 1, src: img1, alt: "Phối cảnh 1" },
+  { id: 2, src: img2, alt: "Phối cảnh 2" },
+  { id: 3, src: img3, alt: "Phối cảnh 3" },
+  { id: 4, src: img4, alt: "Phối cảnh 4" },
+  { id: 5, src: img5, alt: "Phối cảnh 5" },
+  { id: 6, src: img6, alt: "Phối cảnh 6" },
+  { id: 7, src: img7, alt: "Phối cảnh 7" },
+  { id: 8, src: img8, alt: "Phối cảnh 8" },
+  { id: 9, src: img9, alt: "Phối cảnh 9" },
+  { id: 10, src: img10, alt: "Phối cảnh 10" },
+  { id: 11, src: img11, alt: "Phối cảnh 11" },
 ];
 
-// Khi có ảnh thật, thay bằng:
-// const IMAGES = [
-//   { id: 1, src: img1, alt: "Nhà mẫu 1" },
-//   { id: 2, src: img2, alt: "Nhà mẫu 2" },
-//   { id: 3, src: img3, alt: "Nhà mẫu 3" },
-//   { id: 4, src: img4, alt: "Nhà mẫu 4" },
-// ];
-
 const INTERVAL_MS = 5000;
+const VISIBLE_THUMBS = 7; // Số thumbnail hiển thị trong 1 hàng (tăng từ 5 để match width ảnh lớn)
 
 export default function NhaMau() {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -48,6 +38,21 @@ export default function NhaMau() {
   const [fullscreenIdx, setFullscreenIdx] = useState(null);
   const sectionRef = useRef(null);
   const timerRef = useRef(null);
+
+  // ── Tính toán thumbnails nào sẽ hiển thị ──────────────────────────────────
+  const getVisibleThumbsRange = () => {
+    const halfVisible = Math.floor(VISIBLE_THUMBS / 2);
+    const start = (activeIdx - halfVisible + IMAGES.length) % IMAGES.length;
+    return start;
+  };
+
+  const shouldShowThumb = (idx) => {
+    const start = getVisibleThumbsRange();
+    for (let i = 0; i < VISIBLE_THUMBS; i++) {
+      if ((start + i) % IMAGES.length === idx) return true;
+    }
+    return false;
+  };
 
   // ── IntersectionObserver: bắt đầu / dừng auto-slide theo visibility ────────
   useEffect(() => {
@@ -117,34 +122,25 @@ export default function NhaMau() {
                 style={{ cursor: "pointer" }}
               />
             ))}
-
-            {/* Progress bar */}
-            <div className="nm__progress">
-              {IMAGES.map((_, idx) => (
-                <button
-                  key={idx}
-                  className={`nm__progress-dot${activeIdx === idx ? " nm__progress-dot--active" : ""}`}
-                  onClick={() => handleThumbClick(idx)}
-                  aria-label={`Xem ảnh ${idx + 1}`}
-                />
-              ))}
-            </div>
           </div>
 
-          {/* Thumbnails */}
+          {/* Thumbnails - Hiển thị 1 hàng, chỉ thumbnail hiện tại và xung quanh */}
           <div className="nm__thumbs">
-            {IMAGES.map((img, idx) => (
-              <button
-                key={img.id}
-                className={`nm__thumb${activeIdx === idx ? " nm__thumb--active" : ""}`}
-                onClick={() => handleThumbClick(idx)}
-                aria-label={img.alt}
-              >
-                <img src={img.src} alt={img.alt} />
-                {/* Overlay khi active */}
-                <span className="nm__thumb-border" />
-              </button>
-            ))}
+            {IMAGES.map(
+              (img, idx) =>
+                shouldShowThumb(idx) && (
+                  <button
+                    key={img.id}
+                    className={`nm__thumb${activeIdx === idx ? " nm__thumb--active" : ""}`}
+                    onClick={() => handleThumbClick(idx)}
+                    aria-label={img.alt}
+                  >
+                    <img src={img.src} alt={img.alt} />
+                    {/* Overlay khi active */}
+                    <span className="nm__thumb-border" />
+                  </button>
+                ),
+            )}
           </div>
 
           {/* Fullscreen Image Viewer */}

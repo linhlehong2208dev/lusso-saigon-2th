@@ -17,6 +17,8 @@ import tienichImg3 from "../assets/images/tienich/tienich3.webp";
 import tienichImg4 from "../assets/images/tienich/tienich4.webp";
 import tienichImg5 from "../assets/images/tienich/tienich5.webp";
 import tienichImg6 from "../assets/images/tienich/tienich6.webp";
+import tienichImg7 from "../assets/images/tienich/tienich7.webp";
+import tienichImg8 from "../assets/images/tienich/tienich8.webp";
 
 export default function TienIch({ onOpenModal }) {
   const [activeTab, setActiveTab] = useState("noi-khu");
@@ -100,6 +102,8 @@ export default function TienIch({ onOpenModal }) {
     { src: tienichImg4, alt: "Tiện ích ngoại khu 4" },
     { src: tienichImg5, alt: "Tiện ích ngoại khu 5" },
     { src: tienichImg6, alt: "Tiện ích ngoại khu 6" },
+    { src: tienichImg7, alt: "Tiện ích ngoại khu 7" },
+    { src: tienichImg8, alt: "Tiện ích ngoại khu 8" },
   ];
 
   const videos = activeTab === "noi-khu" ? noikhuVideos : ngoaikhuVideos;

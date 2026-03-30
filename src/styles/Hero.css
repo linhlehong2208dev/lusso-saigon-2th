@@ -1,122 +1,66 @@
-/* Hero Section */
+/* Hero Section - Video Fullscreen */
+/* Header height: 80px (fixed) */
+:root {
+  --header-height: 80px;
+}
+
 .hero {
-  /* width: 100%;
-  height: 90rem; */
-  height: 960px;
-  background-image: url("../assets/images/content-main.webp");
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  padding-top: 200px;
-  padding-right: 432px;
-  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--header-height));
+  min-height: 500px;
+  overflow: hidden;
+  margin-top: var(--header-height);
 }
 
-.hero__text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
+/* Video Banner */
+.hero__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-.hero__images {
+/* Fallback image nếu browser không support video */
+.hero__fallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: none;
 }
 
-.hero__logo {
-  width: 300px;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-}
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
 
-/* Responsive: từ 1200px đổ xuống */
-@media (max-width: 1200px) {
-  .hero {
-    width: 100%;
-    height: 56rem;
-    background-color: #f6d7a6;
-    background-image: none;
-    justify-content: center;
-    align-items: stretch;
-    flex-direction: column;
-    padding: 0;
-  }
-
-  .hero__text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 50%;
-    padding-top: 60px;
-    margin-top: 80px;
-    gap: 20px;
-  }
-
-  .hero__images {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    overflow: hidden;
-    padding-bottom: 6.25rem;
-  }
-
-  .hero__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero__logo {
-    width: 15rem;
-  }
-}
+/* Desktop: > 1200px - giữ nguyên */
 
 /* Tablet: 768px - 1200px */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .hero {
-    width: 100%;
-    height: 40rem;
-    max-height: 100%;
-  }
-
-  .hero__images {
-    padding-bottom: 30px;
-  }
-
-  .hero__logo {
-    width: 10rem;
-  }
-
-  .hero__text,
-  .hero__images {
-    gap: 15px;
+    height: calc(100vh - var(--header-height));
+    min-height: 400px;
   }
 }
 
-/* Mobile < 480px */
+/* Mobile: < 768px */
+@media (max-width: 768px) {
+  .hero {
+    height: calc(100vh - var(--header-height));
+    min-height: 350px;
+  }
+}
+
+/* Small mobile: < 480px */
 @media (max-width: 480px) {
   .hero {
-    width: 100%;
-    height: 32rem;
-  }
-
-  .hero__logo {
-    width: 10rem;
-  }
-  .hero__text {
-    padding-top: 2rem;
-    margin-top: 100px;
-  }
-  .hero__text,
-  .hero__images {
-    gap: 0.5rem;
-  }
-  .hero__images {
-    height: 100%;
+    height: calc(100vh - var(--header-height));
+    min-height: 300px;
   }
 }

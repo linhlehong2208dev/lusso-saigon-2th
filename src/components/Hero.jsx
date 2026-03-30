@@ -1,32 +1,56 @@
+import { useState, useEffect, useRef } from "react";
 import heroBg from "../assets/images/content-main.webp";
-import heroBgFallback from "../assets/images/lusso-saigon-mobile.webp";
-import lussoMobileHero from "../assets/images/lusso-mobile-hero.png";
-import logo1 from "../assets/images/icon-lusso-saigon_3_724x159.png";
-import logoMobile from "../assets/images/logo-lusso-saigon.png";
-import logo2 from "../assets/images/logo-lusso_724x198.png";
+import bannerVideo from "../assets/images/video/banner-lusso.mp4";
 import "../styles/Hero.css";
 
 export default function Hero() {
+  const heroRef = useRef(null);
+  const videoRef = useRef(null);
+  const [isInView, setIsInView] = useState(true);
+
+  // Intersection Observer để kiểm tra xem hero có đang hiển thị không
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+        // Play/pause video based on visibility
+        if (entry.isIntersecting && videoRef.current) {
+          videoRef.current.play().catch(() => {
+            // Autoplay có thể bị chặn bởi browser
+          });
+        } else if (!entry.isIntersecting && videoRef.current) {
+          videoRef.current.pause();
+        }
+      },
+      { threshold: 0.1 }, // Khi 10% của section hiển thị
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => {
+      if (heroRef.current) {
+        observer.unobserve(heroRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="hero">
-      <div className="hero__text">
-        <picture>
-          <source media="(max-width: 1200px)" srcSet={logoMobile} />
-          <img src={logo1} alt="Lusso Saigon" className="hero__logo" />
-        </picture>
-        <img src={logo2} alt="Lusso" className="hero__logo" />
-      </div>
-      <div className="hero__images">
-        <picture>
-          <source media="(max-width: 1200px)" srcSet={lussoMobileHero} />
-          <source srcSet={heroBg} type="image/webp" />
-          <img
-            src={heroBgFallback}
-            alt="Lusso Saigon Hero"
-            className="hero__image"
-          />
-        </picture>
-      </div>
+    <div className="hero" ref={heroRef}>
+      {/* Video Banner */}
+      <video
+        ref={videoRef}
+        className="hero__video"
+        muted
+        loop
+        playsInline
+        preload="metadata"
+      >
+        <source src={bannerVideo} type="video/mp4" />
+        {/* Fallback hình ảnh nếu browser không support video */}
+        <img src={heroBg} alt="Lusso Saigon Hero" className="hero__fallback" />
+      </video>
     </div>
   );
 }

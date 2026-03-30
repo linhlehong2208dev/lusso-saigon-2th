@@ -9,8 +9,8 @@ export default function Overview() {
     <div className={styles.wrapper} id="tong-quan">
       <div className={styles.container}>
         {/* TITLE */}
-        <h1 className={styles.title}>TỔNG QUAN DỰ ÁN LUSSO SAIGON</h1>
-
+        <h1 className={styles.title}>TỔNG QUAN DỰ ÁN</h1>
+        <h1 className={styles.title}>LUSSO SAIGON</h1>
         {/* GRID */}
         <div className={styles.grid}>
           {/* Card 1 */}

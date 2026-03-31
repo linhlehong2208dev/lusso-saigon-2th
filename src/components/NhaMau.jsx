@@ -2,17 +2,17 @@ import { useState, useEffect, useRef } from "react";
 import "../styles/NhaMau.css";
 
 // ── Import 11 ảnh phối cảnh ───────────────────────────────────────────────────
-import img1 from "../assets/images/phoicanh/1.webp";
-import img2 from "../assets/images/phoicanh/2.webp";
-import img3 from "../assets/images/phoicanh/3.webp";
-import img4 from "../assets/images/phoicanh/4.webp";
-import img5 from "../assets/images/phoicanh/5.webp";
-import img6 from "../assets/images/phoicanh/6.webp";
-import img7 from "../assets/images/phoicanh/7.webp";
-import img8 from "../assets/images/phoicanh/8.webp";
-import img9 from "../assets/images/phoicanh/9.webp";
-import img10 from "../assets/images/phoicanh/10.webp";
-import img11 from "../assets/images/phoicanh/11.webp";
+import img1 from "/images/phoicanh/1.webp";
+import img2 from "/images/phoicanh/2.webp";
+import img3 from "/images/phoicanh/3.webp";
+import img4 from "/images/phoicanh/4.webp";
+import img5 from "/images/phoicanh/5.webp";
+import img6 from "/images/phoicanh/6.webp";
+import img7 from "/images/phoicanh/7.webp";
+import img8 from "/images/phoicanh/8.webp";
+import img9 from "/images/phoicanh/9.webp";
+import img10 from "/images/phoicanh/10.webp";
+import img11 from "/images/phoicanh/11.webp";
 
 // ── Data: 11 ảnh phối cảnh ────────────────────────────────────────────────────
 const IMAGES = [

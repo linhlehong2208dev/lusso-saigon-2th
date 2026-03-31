@@ -1,8 +1,8 @@
 import "./MatBang.css";
 import { useState } from "react";
 
-import matBangImg from "../assets/images/matbang.webp";
-import matBangMobileImg from "../assets/images/lusso-saigon-mobile.webp";
+import matBangImg from "/images/matbang.webp";
+import matBangMobileImg from "/images/lusso-saigon-mobile.webp";
 // ── 22 tiện ích chia sẵn 3 trang ─────────────────────────────────────────────
 const PAGES = [
   [

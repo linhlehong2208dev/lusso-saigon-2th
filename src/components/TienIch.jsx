@@ -3,22 +3,22 @@ import styles from "../styles/TienIch.module.css";
 import arrowIcon from "../assets/images/arrow-icon.png";
 
 // Import nội khu videos
-import tienichVid1 from "../assets/images/video/tienich.mp4";
-import tienichVid2 from "../assets/images/video/tienich2.mp4";
-import tienichVid4 from "../assets/images/video/tienich4.mp4";
-import tienichVid5 from "../assets/images/video/tienich5.mp4";
-import tienichVid6 from "../assets/images/video/tienich6.mp4";
-import tienichVid7 from "../assets/images/video/tienich7.mp4";
+import tienichVid1 from "/videos/tienich.mp4";
+import tienichVid2 from "/videos/tienich2.mp4";
+import tienichVid4 from "/videos/tienich4.mp4";
+import tienichVid5 from "/videos/tienich5.mp4";
+import tienichVid6 from "/videos/tienich6.mp4";
+import tienichVid7 from "/videos/tienich7.mp4";
 
 // Import ngoại khu images
-import tienichImg1 from "../assets/images/tienich/tienich1.webp";
-import tienichImg2 from "../assets/images/tienich/tienich2.webp";
-import tienichImg3 from "../assets/images/tienich/tienich3.webp";
-import tienichImg4 from "../assets/images/tienich/tienich4.webp";
-import tienichImg5 from "../assets/images/tienich/tienich5.webp";
-import tienichImg6 from "../assets/images/tienich/tienich6.webp";
-import tienichImg7 from "../assets/images/tienich/tienich7.webp";
-import tienichImg8 from "../assets/images/tienich/tienich8.webp";
+import tienichImg1 from "/images/tienich/tienich1.webp";
+import tienichImg2 from "/images/tienich/tienich2.webp";
+import tienichImg3 from "/images/tienich/tienich3.webp";
+import tienichImg4 from "/images/tienich/tienich4.webp";
+import tienichImg5 from "/images/tienich/tienich5.webp";
+import tienichImg6 from "/images/tienich/tienich6.webp";
+import tienichImg7 from "/images/tienich/tienich7.webp";
+import tienichImg8 from "/images/tienich/tienich8.webp";
 
 export default function TienIch({ onOpenModal }) {
   const [activeTab, setActiveTab] = useState("noi-khu");

@@ -1,6 +1,6 @@
 // Hero.jsx
 import { useState, useEffect, useRef } from "react";
-import heroBg from "../assets/images/content-main.webp";
+import heroBg from "/images/content-main.webp";
 import "../styles/Hero.css";
 
 const BANNER_VIDEO = "/videos/banner-lusso.mp4";

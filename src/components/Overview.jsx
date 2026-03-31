@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/overview.module.css";
 import phatDatLogo from "../assets/images/phat-dat-corp.png";
 import worldHotelsLogo from "../assets/images/worldhotels.png";
-import waveBg from "../assets/images/wave.png";
+import waveBg from "../assets/images/wave.webp";
 
 export default function Overview() {
   return (

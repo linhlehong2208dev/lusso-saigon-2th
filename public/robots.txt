@@ -1,0 +1,31 @@
+# Cho phép Google và Bing index trang
+User-agent: Googlebot
+Allow: /
+Disallow: /assets/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /assets/
+
+# Chặn toàn bộ bot khác không cần thiết
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+# Chặn tất cả bot không rõ nguồn gốc crawl /assets
+User-agent: *
+Disallow: /assets/

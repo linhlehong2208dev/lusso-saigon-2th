@@ -1,13 +1,16 @@
 {
-  "headers": [
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "routes": [
     {
-      "source": "/(.*)",
-      "headers": [
+      "src": "/(.*)",
+      "has": [
         {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow"
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i)(bot|crawl|spider|curl|wget|python|scrapy)"
         }
-      ]
+      ],
+      "status": 403
     }
   ]
 }
